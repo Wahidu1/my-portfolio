@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Asimovian&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Libertinus+Keyboard&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Story+Script&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap');
+@import "tailwindcss";
+
+:root {
+  --font-asimovian: 'Asimovian', sans-serif;
+  --font-inter: 'Inter', sans-serif;
+  --font-libertinus: 'Libertinus Keyboard', sans-serif;
+  --font-gowun: 'Gowun Dodum', sans-serif;
+  --font-roboto: 'Roboto Condensed', sans-serif;
+}
+
+/* body {
+  font-family: var(--font-asimovian);
+} */
+
+.font-asimovian {
+  font-family: var(--font-asimovian);
+}
+
+.font-inter {
+  font-family: var(--font-inter);
+}
+
+.font-libertinus {
+  font-family: var(--font-libertinus);
+}
+
+.font-gowun {
+  font-family: var(--font-gowun);
+}
+
+.font-roboto {
+  font-family: var(--font-roboto);
+}
+
+.font-story-script {
+  font-family: 'Story Script', cursive;
+}
+
+.font-dancing-script {
+  font-family: 'Dancing Script', cursive;
+}
+
+body {
+  font-family: var(--font-roboto);
+}
+
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+  100% { transform: translateY(0px); }
+}
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.typing-animation {
+  overflow: hidden;
+  border-right: 2px solid #333;
+  white-space: nowrap;
+  animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: #333; }
+}
