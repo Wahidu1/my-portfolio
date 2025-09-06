@@ -8,7 +8,6 @@ const Header = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const { settingsFiles } = useSettingsFiles();
-  console.log(settingsFiles);
 
 
   return (

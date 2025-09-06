@@ -8,13 +8,13 @@ import { getFunctions } from "firebase/functions";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyCTHFh5YwAyezHlxD6LFlywnAl1wTTbRjk",
-  authDomain: "wahidulislam-site.firebaseapp.com",
-  projectId: "wahidulislam-site",
-  storageBucket: "wahidulislam-site.firebasestorage.app",
-  messagingSenderId: "90536514479",
-  appId: "1:90536514479:web:c93174c27844c1d595155a",
-  measurementId: "G-H5CSWTTKS1"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket:import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
 };
 
 

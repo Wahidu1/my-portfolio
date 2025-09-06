@@ -1,59 +1,38 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGithub, faLinkedinIn, faTwitter } from "@fortawesome/free-brands-svg-icons";
 import SectionCard from "../ui/SectionCard";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { sendMessage } from "../../services/contactService";
 import { useSettings } from "../../context/SettingsContext";
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 
 export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [loading, setLoading] = useState(false);
   const [toast, setToast] = useState({ show: false, success: true, message: "" });
-  const [lastSent, setLastSent] = useState(0);
-  const [timeLeft, setTimeLeft] = useState(0);
   const { settings } = useSettings();
-  const cooldown = 60 * 1000; // 60 seconds
-
-  useEffect(() => {
-    let timer;
-    if (timeLeft > 0) {
-      timer = setInterval(() => setTimeLeft(prev => prev - 1), 1000);
-    }
-    return () => clearInterval(timer);
-  }, [timeLeft]);
-
-  const showToast = (success, message) => {
-    setToast({ show: true, success, message });
-    setTimeout(() => setToast(prev => ({ ...prev, show: false })), 4000);
-  };
+  const { executeRecaptcha } = useGoogleReCaptcha();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const now = Date.now();
-    if (now - lastSent < cooldown) {
-      showToast(false, `Please wait ${Math.ceil((cooldown - (now - lastSent)) / 1000)}s before sending again.`);
-      return;
-    }
-    setLastSent(now);
-    setTimeLeft(60);
-
     setLoading(true);
     setToast({ show: false, success: true, message: "" });
 
     try {
-      // Get reCAPTCHA v3 token
-      const token = await window.grecaptcha.execute("6LcTPMArAAAAAKWTaXwkxfXqecVyMuuDyos3RmUV", { action: "contact_form" });
+      if (!executeRecaptcha) {
+        showToast(false, "reCAPTCHA not ready, try again.");
+        return;
+      }
 
-      const res = await sendMessage({ ...form, recaptchaToken: token });
+      const token = await executeRecaptcha("contact_form");
+      const res = await sendMessage({ ...form, token });
 
       if (res.success) {
         setForm({ name: "", email: "", message: "" });
-        showToast(true, res.message || "Message sent successfully!");
+        showToast(true, "Message sent! We've emailed you a confirmation.");
       } else {
-        console.error("sendMessage failed:", res);
-        showToast(false, res.message || "Failed to send message.");
+        showToast(false, res.message);
       }
+
     } catch (err) {
       console.error(err);
       showToast(false, "Something went wrong. Please try again.");
@@ -62,9 +41,13 @@ export default function Contact() {
     }
   };
 
+  const showToast = (success, message) => {
+    setToast({ show: true, success, message });
+    setTimeout(() => setToast((prev) => ({ ...prev, show: false })), 4000);
+  };
+
   return (
     <section className="bg-gray-100 text-black py-24 px-6 md:px-20 relative">
-      {/* Toast */}
       <AnimatePresence>
         {toast.show && (
           <motion.div
@@ -81,8 +64,8 @@ export default function Contact() {
 
       <div className="max-w-4xl mx-auto text-center">
         <SectionCard
-          heading={"Get in Touch"}
-          subtext={"Have a project idea or just want to say hello? Let’s connect!"}
+          heading="Get in Touch"
+          subtext="Have a project idea or just want to say hello? Let’s connect!"
         />
 
         <motion.form
@@ -115,45 +98,19 @@ export default function Contact() {
             onChange={(e) => setForm({ ...form, message: e.target.value })}
             className="w-full p-4 rounded-xl bg-white text-black placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-300"
             required
-          ></textarea>
-
+          />
           <button
             type="submit"
-            disabled={loading || timeLeft > 0}
+            disabled={loading}
             className={`w-full font-semibold py-4 rounded-xl transition duration-300 ease-in-out
-              ${loading || timeLeft > 0
+              ${loading
                 ? "bg-gray-400 text-gray-200 cursor-not-allowed"
                 : "bg-gray-900 text-gray-300 hover:bg-gray-300 hover:text-gray-900 hover:scale-105"
               }`}
           >
-            {timeLeft > 0 ? `Wait ${timeLeft}s` : loading ? "Sending..." : "Send Message"}
+            {loading ? "Sending..." : "Send Message"}
           </button>
         </motion.form>
-
-        <motion.div
-          className="mt-12 space-y-4"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ delay: 0.7 }}
-        >
-          <p className="text-gray-400">
-            Or email me directly at{" "}
-            <a href={`mailto:${settings.email}`} className="text-blue-500 underline">
-              {settings.email}
-            </a>
-          </p>
-          <div className="flex gap-6 justify-center text-xl">
-            <a href={settings.github || "#"} className="hover:text-gray-300 transition">
-              <FontAwesomeIcon icon={faGithub} />
-            </a>
-            <a href={settings.linkedin || "#"} className="hover:text-gray-300 transition">
-              <FontAwesomeIcon icon={faLinkedinIn} />
-            </a>
-            <a href={settings.twitter || "#"} className="hover:text-gray-300 transition">
-              <FontAwesomeIcon icon={faTwitter} />
-            </a>
-          </div>
-        </motion.div>
       </div>
     </section>
   );
