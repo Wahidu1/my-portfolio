@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Download } from "lucide-react";
-import Wahid from "../../assets/wahid.png";
+import Wahid from "../../assets/wahid2.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub, faLinkedinIn, faTwitter } from "@fortawesome/free-brands-svg-icons";
 import { Link } from "react-router-dom";

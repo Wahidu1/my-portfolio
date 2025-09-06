@@ -1,23 +1,9 @@
-import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPython, faJs, faReact, faGitAlt, faNodeJs, faDocker } from "@fortawesome/free-brands-svg-icons";
-import { faDatabase } from "@fortawesome/free-solid-svg-icons";
-import Wahid from "../../assets/wahid2.jpg";
+import Wahid from "../../assets/wahid.png";
 import { useSettings } from "../../context/SettingsContext";
 import { highlightText } from "../../utils/highlightText";
 
-const iconMap = {
-  python: faPython,
-  javascript: faJs,
-  react: faReact,
-  nodejs: faNodeJs,
-  git: faGitAlt,
-  docker: faDocker,
-  postgresql: faDatabase,
-  django: faPython,
-  "django rest framework": faPython,
-};
+
 
 export default function AboutMe() {
   const { settings } = useSettings();
@@ -45,7 +31,7 @@ export default function AboutMe() {
           transition={{ duration: 0.8, delay: 0.2 }}
         >
           <h2 className="text-4xl font-bold text-black font-asimovian">About Me</h2>
-          <p className="text-gray-700 text-lg md:text-xl font-gowun leading-relaxed">
+          <p className="text-gray-700 text-lg md:text-xl font-gowun leading-relaxed text-justify">
             {highlightText(settings.about, settings.highlightText)}
           </p>
 
