@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "title": "Backend Developer",
+    "company": "TransformsAI (Remote)",
+    "description": "Developed scalable Django REST Framework projects with optimized APIs and databases. Implemented authentication (JWT, OAuth) and deployed secure cloud applications.",
+    "start_date": "2024-12-01",
+    "end_date": null
+  },
+  {
+    "id": 2,
+    "title": "Python Developer",
+    "company": "HRsoftBD",
+    "description": "Completed a 6-month Python & Django internship. Developed an HR desktop application using Tkinter and a Face Recognition System.",
+    "start_date": "2023-12-01",
+    "end_date": "2024-12-31"
+  }
+]

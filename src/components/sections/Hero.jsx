@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Download } from "lucide-react";
 import Wahid from "../../assets/wahid.png";
-import CV from "../../assets/cv.pdf";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub, faLinkedinIn, faTwitter } from "@fortawesome/free-brands-svg-icons";
 import { Link } from "react-router-dom";
@@ -50,7 +49,7 @@ export default function Hero() {
               transition={{ delay: 0.5 }}
             >
               <a
-                href={settingsFiles.cv || CV}
+                href={settingsFiles.cv}
                 download
                 className="flex items-center gap-2 px-6 py-3 rounded-2xl shadow-sm bg-black text-white hover:bg-gray-800 transition"
               >

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { ChevronDown, Menu, X } from "lucide-react";
-import Logo from "../../assets/logo.png";
 import { Link } from "react-router-dom";
 import { SettingsFilesProvider, useSettingsFiles } from "../../context/settingsFilesContext";
 
@@ -18,7 +17,7 @@ const Header = () => {
         {/* Logo */}
         <div className="flex items-center space-x-2">
           <Link to="/" className="flex items-center">
-            <img src={settingsFiles.logo || Logo} alt="Logo" className="h-8" />
+            <img src={settingsFiles.logo} alt="Logo" className="h-8" />
             <span className="text-gray-700 text-2xl font-bold">Wahidul Islam</span>
           </Link>
 

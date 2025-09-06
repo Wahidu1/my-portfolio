@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "title": "Supervised Machine Learning: Regression and Classification",
+    "organization": "Coursera",
+    "image": "/achievements/supervised_learning.jpg",
+    "date": null
+  },
+  {
+    "id": 2,
+    "title": "Advanced Learning Algorithms",
+    "organization": "Coursera",
+    "image": "/achievements/advanced_algorithms.jpg",
+    "date": null
+  }
+]

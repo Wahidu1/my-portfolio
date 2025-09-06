@@ -11,8 +11,7 @@ export default function Achievements() {
   useEffect(() => {
     async function fetchAchievements() {
       try {
-        const response = await getAchievements();
-        const data = response.results || []; // your API wraps in "results"
+        const data = await getAchievements();
         const formatted = data.map((item) => ({
           id: item.id,
           title: item.title,

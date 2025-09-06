@@ -1,0 +1,23 @@
+[
+    { "key": "facebook", "value": "https://facebook.com/yourpage" },
+    { "key": "twitter", "value": "https://twitter.com/yourprofile" },
+    { "key": "linkedin", "value": "https://linkedin.com/in/yourprofile" },
+    { "key": "github", "value": "https://github.com/yourusername" },
+    { "key": "email", "value": "Vb5r0@example.com" },
+{
+  "key": "about",
+  "value": "I’m Wahid, a backend developer specializing in Django and Django REST Framework (DRF). I build clean, scalable, and efficient backend systems that power modern web applications.\n\nI focus on performance, maintainability, and security, creating reliable APIs and services. I also enjoy working with PostgreSQL, Redis, Docker, and modern backend technologies to deliver end-to-end solutions."
+},
+
+    {
+    "key": "header",
+    "value": "Specializing in Django & Django REST Framework. I craft clean APIs, scalable systems, and efficient backend solutions that power modern web applications."
+    },
+    {
+    "key": "highlightText",
+    "value": "[\"Django\", \"DRF\", \"Python\", \"Flask\", \"FastAPI\", \"React\"]"
+    },
+    { "key": "website_url", "value": "https://example.com" },
+    { "key": "website_name", "value": "My Portfolio" },
+    { "key": "website_logo", "value": "/static/default_logo.png" }
+]

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import { getBlogBySlug } from "../../services/blogService";
+import ReactMarkdown from 'react-markdown';
 
 export default function BlogDetails() {
   const { slug } = useParams();
@@ -64,9 +65,9 @@ export default function BlogDetails() {
       )}
 
       {/* Blog Content */}
-      <article className="prose prose-lg max-w-none">
-        {blog.content}
-      </article>
+  <article className="prose prose-lg max-w-none !text-justify">
+    <ReactMarkdown>{blog.content}</ReactMarkdown>
+  </article>
     </motion.section>
   );
 }

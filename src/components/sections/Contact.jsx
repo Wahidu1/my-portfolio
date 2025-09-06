@@ -10,19 +10,48 @@ export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [loading, setLoading] = useState(false);
   const [toast, setToast] = useState({ show: false, success: true, message: "" });
+  const [lastSent, setLastSent] = useState(0);
+  const [timeLeft, setTimeLeft] = useState(0);
   const { settings } = useSettings();
+  const cooldown = 60 * 1000; // 60 seconds
+
+  useEffect(() => {
+    let timer;
+    if (timeLeft > 0) {
+      timer = setInterval(() => setTimeLeft(prev => prev - 1), 1000);
+    }
+    return () => clearInterval(timer);
+  }, [timeLeft]);
+
+  const showToast = (success, message) => {
+    setToast({ show: true, success, message });
+    setTimeout(() => setToast(prev => ({ ...prev, show: false })), 4000);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const now = Date.now();
+    if (now - lastSent < cooldown) {
+      showToast(false, `Please wait ${Math.ceil((cooldown - (now - lastSent)) / 1000)}s before sending again.`);
+      return;
+    }
+    setLastSent(now);
+    setTimeLeft(60);
+
     setLoading(true);
     setToast({ show: false, success: true, message: "" });
 
     try {
-      const res = await sendMessage(form);
+      // Get reCAPTCHA v3 token
+      const token = await window.grecaptcha.execute("6LcTPMArAAAAAKWTaXwkxfXqecVyMuuDyos3RmUV", { action: "contact_form" });
+
+      const res = await sendMessage({ ...form, recaptchaToken: token });
+
       if (res.success) {
         setForm({ name: "", email: "", message: "" });
         showToast(true, res.message || "Message sent successfully!");
       } else {
+        console.error("sendMessage failed:", res);
         showToast(false, res.message || "Failed to send message.");
       }
     } catch (err) {
@@ -31,11 +60,6 @@ export default function Contact() {
     } finally {
       setLoading(false);
     }
-  };
-
-  const showToast = (success, message) => {
-    setToast({ show: true, success, message });
-    setTimeout(() => setToast({ ...toast, show: false }), 4000); // hide after 4s
   };
 
   return (
@@ -95,18 +119,17 @@ export default function Contact() {
 
           <button
             type="submit"
-            disabled={loading}
+            disabled={loading || timeLeft > 0}
             className={`w-full font-semibold py-4 rounded-xl transition duration-300 ease-in-out
-              ${loading
+              ${loading || timeLeft > 0
                 ? "bg-gray-400 text-gray-200 cursor-not-allowed"
                 : "bg-gray-900 text-gray-300 hover:bg-gray-300 hover:text-gray-900 hover:scale-105"
               }`}
           >
-            {loading ? "Sending..." : "Send Message"}
+            {timeLeft > 0 ? `Wait ${timeLeft}s` : loading ? "Sending..." : "Send Message"}
           </button>
         </motion.form>
 
-        {/* Alternative Contact Info */}
         <motion.div
           className="mt-12 space-y-4"
           initial={{ opacity: 0 }}

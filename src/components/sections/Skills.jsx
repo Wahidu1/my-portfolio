@@ -41,7 +41,7 @@ export default function Skills() {
             icon = `${item.icon}`;
           } else {
             // case 2: fallback to iconMap
-            icon = iconMap[item.name.toLowerCase()] || faJs;
+            icon = iconMap[item.name.toLowerCase()] || faPython;
           }
 
           return {

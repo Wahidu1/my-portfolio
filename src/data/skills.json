@@ -1,0 +1,22 @@
+[
+  { "name": "Python", "percentage": 90, "icon": "" },
+  { "name": "Django", "percentage": 90, "icon": "/skills/django.png" },
+  { "name": "DRF", "percentage": 85, "icon": "/skills/drf.png" },
+  { "name": "PostgreSQL", "percentage": 80, "icon": "" },
+  { "name": "MySQL", "percentage": 75, "icon": "/skills/mysql.png" },
+  { "name": "Docker", "percentage": 75, "icon": "" },
+  { "name": "Git & GitHub", "percentage": 80, "icon": "/skills/github.png" },
+  { "name": "CI/CD", "percentage": 70, "icon": "/skills/cicd.png" },
+  { "name": "Cloud (AWS, Heroku)", "percentage": 70, "icon": "/skills/cloud.png" },
+  { "name": "Celery", "percentage": 65, "icon": "" },
+  { "name": "Authentication (JWT/OAuth)", "percentage": 80, "icon": "/skills/authentication.png" },
+  { "name": "Unit Testing", "percentage": 70, "icon": "/skills/unit.png" },
+  { "name": "Redis", "percentage": 70, "icon": "/skills/redis.png" },
+  { "name": "FastAPI", "percentage": 65, "icon": "/skills/api.png" },
+  { "name": "HTML/CSS/Bootstrap", "percentage": 70, "icon": "/skills/html.png" },
+  { "name": "JavaScript", "percentage": 50, "icon": "" },
+  { "name": "React", "percentage": 30, "icon": "/skills/react.png" },
+  { "name": "C / C++", "percentage": 60, "icon": "/skills/c++.png" },
+  { "name": "Linux / Shell", "percentage": 70, "icon": "/skills/linux.png" },
+  { "name": "Postman", "percentage": 75, "icon": "/skills/postman.png" }
+]

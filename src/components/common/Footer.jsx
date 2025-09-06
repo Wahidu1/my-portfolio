@@ -1,6 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub, faLinkedinIn, faTwitter } from "@fortawesome/free-brands-svg-icons";
-import Logo from "../../assets/logo.png";
 import { Link } from "react-router-dom";
 import { useSettings } from "../../context/SettingsContext";
 import { useSettingsFiles } from "../../context/settingsFilesContext";
@@ -16,7 +15,7 @@ export default function Footer() {
         {/* Logo with white overlay */}
         <div className="flex items-center space-x-2">
           <img
-            src={settingsFiles.logo || Logo}
+            src={settingsFiles.logo}
             alt="Logo"
             className="h-10 md:h-12 filter brightness-0 invert"
           />

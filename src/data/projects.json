@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "title": "Online Exam System",
+    "subtext": "Full-stack Web Application",
+    "description": "A secure platform featuring robust authentication, comprehensive exam management with timers, real-time result generation, and user profiles.",
+    "image": "/projects/online-exam.png",
+    "technologies": ["Django", "HTML", "CSS", "Bootstrap", "SQLite"],
+    "live_link": "",
+    "github_link": "https://github.com/Wahidu1/Online-Exam"
+  },
+  {
+    "id": 2,
+    "title": "News Portal",
+    "subtext": "Content Management System",
+    "description": "A dynamic news platform with full article CRUD functionality, a rich text editor, categories, tags, comments, user authentication, and an admin dashboard.",
+    "image": "/projects/news-portal.png",
+    "technologies": ["Django", "HTML", "CSS", "Bootstrap", "SQLite"],
+    "live_link": "",
+    "github_link": "https://github.com/Wahidu1/news-portal"
+  },
+  {
+    "id": 3,
+    "title": "E-Learning Platform",
+    "subtext": "Educational Web Application",
+    "description": "An e-learning site with user authentication, course and module management, student enrollment capabilities, and a fully responsive UI.",
+    "image": "/projects/e-learning.png",
+    "technologies": ["Django", "Bootstrap", "SQLite"],
+    "live_link": "",
+    "github_link": "https://github.com/Wahidu1/eLearning"
+  }
+]

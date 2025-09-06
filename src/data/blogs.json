@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "title": "The Foundation: Understanding Django and DRF",
+    "slug": "django-drf-foundation",
+    "excerpt": "Learn the symbiotic relationship between Django and Django REST Framework, the two pillars of modern API development in Python.",
+    "content": "**Django** is a powerful Python web framework that handles the backend of web applications. It's known for its \"batteries-included\" philosophy, which means it comes with many built-in features like an ORM (Object-Relational Mapper) for database interactions, an admin panel, and a robust URL routing system. This makes it ideal for building complex, data-driven websites quickly.\n\n**Django REST Framework (DRF)** is an essential toolkit built on top of Django. While Django can build full-stack web applications, it's not natively designed to create APIs. DRF simplifies building RESTful APIs by providing serializers, views, and routers. This allows you to expose your Django models as a well-structured API, which can then be consumed by front-end frameworks like React or mobile applications.\n\nThe relationship between them is symbiotic: Django provides the core functionality and data management, while DRF leverages this foundation to create a modern, powerful API layer.",
+    "image": "/blogs/blog1.png",
+    "published_at": "2025-01-10"
+  },
+  {
+    "id": 2,
+    "title": "Building Your First API: A Step-by-Step Guide 🚀",
+    "slug": "first-django-api",
+    "excerpt": "A straightforward guide to building your first REST API using Django and DRF, covering models, serializers, and views.",
+    "content": "Creating an API with Django and DRF is straightforward. Here's a basic guide to get you started:\n\n1. **Set up your project:** Create a new Django project and a virtual environment. Install dependencies: `pip install django djangorestframework`.\n2. **Define your models:** In your Django app, create a model in `models.py`. For example, a `Blog` model with fields for `title`, `content`, and `published_date`.\n3. **Create a serializer:** Serializers translate complex data types into Python types that can be rendered as JSON or XML. Example:\n\n```python\nfrom rest_framework import serializers\nfrom .models import Blog\n\nclass BlogSerializer(serializers.ModelSerializer):\n    class Meta:\n        model = Blog\n        fields = '__all__'\n```\n\n4. **Write your views:** DRF provides generic views and viewsets to reduce boilerplate. A `ListCreateAPIView` is perfect for retrieving and creating objects.\n5. **Configure URLs:** Use DRF's `DefaultRouter` in your `urls.py` to automatically generate URL patterns.\n6. **Run migrations:** Apply your model changes with `python manage.py makemigrations` and `python manage.py migrate`.",
+    "image": "/blogs/blog2.png",
+    "published_at": "2025-02-05"
+  },
+  {
+    "id": 3,
+    "title": "Best Practices for Professional Django and DRF Development 💡",
+    "slug": "django-drf-best-practices",
+    "excerpt": "Essential best practices for building scalable, secure, and maintainable APIs with Django and DRF.",
+    "content": "To build scalable, maintainable, and secure applications with Django and DRF, follow these best practices:\n\n* **Skinny Views, Fat Models:** Keep views lean. Place business logic in models or custom managers for easier testing and maintenance.\n* **Use Generic Views and Viewsets:** DRF provides generic views and viewsets for common API actions like listing, creating, retrieving, updating, and deleting objects. This avoids repetitive boilerplate.\n* **Optimize Database Queries:** Avoid the \"N+1 query problem\". Use `select_related` and `prefetch_related` to fetch related objects in fewer queries.\n* **Implement Authentication and Permissions:** Security is crucial. DRF supports authentication (TokenAuthentication, JWT) and permissions (e.g., only authenticated users can post data).\n* **Thoroughly Test Your API:** Write unit and integration tests for models, serializers, and views using Django's testing framework.",
+    "image": "/blogs/blog3.png",
+    "published_at": "2025-03-12"
+  }
+]

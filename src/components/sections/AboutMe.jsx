@@ -6,7 +6,6 @@ import { faDatabase } from "@fortawesome/free-solid-svg-icons";
 import Wahid from "../../assets/wahid2.jpg";
 import { useSettings } from "../../context/SettingsContext";
 import { highlightText } from "../../utils/highlightText";
-import { getSkills } from "../../services/skillService";
 
 const iconMap = {
   python: faPython,
@@ -22,39 +21,6 @@ const iconMap = {
 
 export default function AboutMe() {
   const { settings } = useSettings();
-  const [skills, setSkills] = useState([]);
-
-  useEffect(() => {
-    async function fetchSkills() {
-      try {
-        const response = await getSkills();
-        const data = response.results || [];
-        const formatted = data.map((item) => {
-          let icon;
-
-          if (item.icon) {
-            // API provides image
-            icon = item.icon;
-          } else {
-            // fallback to FontAwesome icon
-            icon = iconMap[item.name.toLowerCase()] || faJs;
-          }
-
-          return {
-            id: item.id,
-            name: item.name,
-            icon,
-            isImage: !!item.icon,
-          };
-        });
-        setSkills(formatted);
-      } catch (err) {
-        console.error("Error loading skills:", err);
-      }
-    }
-
-    fetchSkills();
-  }, []);
 
   return (
     <section className="bg-white py-24 px-6 md:px-20">
@@ -83,22 +49,6 @@ export default function AboutMe() {
             {highlightText(settings.about, settings.highlightText)}
           </p>
 
-          {/* Skills / Tech Stack */}
-          <div className="flex flex-wrap gap-4 mt-4 justify-center md:justify-start">
-            {skills.map((skill) => (
-              <motion.div
-                key={skill.id}
-                whileHover={{ scale: 1.2 }}
-                className="p-4 bg-gray-100 rounded-xl shadow-sm flex items-center justify-center"
-              >
-                {skill.isImage ? (
-                  <img src={skill.icon} alt={skill.name} className="w-10 h-10 object-contain" />
-                ) : (
-                  <FontAwesomeIcon icon={skill.icon} size="2x" className="text-black" />
-                )}
-              </motion.div>
-            ))}
-          </div>
         </motion.div>
       </div>
     </section>
