@@ -1,9 +1,9 @@
 [
-    { "key": "facebook", "value": "https://facebook.com/yourpage" },
-    { "key": "twitter", "value": "https://twitter.com/yourprofile" },
-    { "key": "linkedin", "value": "https://linkedin.com/in/yourprofile" },
-    { "key": "github", "value": "https://github.com/yourusername" },
-    { "key": "email", "value": "Vb5r0@example.com" },
+    { "key": "facebook", "value": "https://www.facebook.com/wahidul.islam.226" },
+    { "key": "twitter", "value": "https://x.com/Wahidul226" },
+    { "key": "linkedin", "value": "https://www.linkedin.com/in/wahidul-226-islam/" },
+    { "key": "github", "value": "https://github.com/Wahidu1" },
+    { "key": "email", "value": "wahidulislambd4@gmail.com" },
 {
   "key": "about",
   "value": "I’m Wahid, a backend developer specializing in Django and Django REST Framework (DRF). I build clean, scalable, and efficient backend systems that power modern web applications.\n\nI focus on performance, maintainability, and security, creating reliable APIs and services. I also enjoy working with PostgreSQL, Redis, Docker, and modern backend technologies to deliver end-to-end solutions."
@@ -17,7 +17,7 @@
     "key": "highlightText",
     "value": "[\"Django\", \"DRF\", \"Python\", \"Flask\", \"FastAPI\", \"React\"]"
     },
-    { "key": "website_url", "value": "https://example.com" },
-    { "key": "website_name", "value": "My Portfolio" },
-    { "key": "website_logo", "value": "/static/default_logo.png" }
+    { "key": "website_url", "value": "https://wahidulislam-site.web.app/" },
+    { "key": "website_name", "value": "Wahidul Islam" },
+    { "key": "website_logo", "value": "/files/logo.png" }
 ]
