@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import AchievementCard from "../ui/AchievementCard";
 import SectionCard from "../ui/SectionCard";
+import StaggerGrid from "../ui/StaggerGrid";
 import { getAchievements } from "../../services/achievementsService";
-
-
 
 export default function Achievements() {
   const [achievements, setAchievements] = useState([]);
@@ -12,14 +11,10 @@ export default function Achievements() {
     async function fetchAchievements() {
       try {
         const data = await getAchievements();
-        const formatted = data.map((item) => ({
-          id: item.id,
-          title: item.title,
-          organization: item.organization,
-          image: item.image,
-          date: item.date,
-        }))
-        setAchievements(formatted);
+        setAchievements(data.map((item) => ({
+          id: item.id, title: item.title, organization: item.organization,
+          image: item.image, date: item.date,
+        })));
       } catch (err) {
         console.error("Error loading achievements:", err);
       }
@@ -28,16 +23,14 @@ export default function Achievements() {
   }, []);
 
   return (
-    <section className="py-24 px-6 md:px-20 bg-gray-50 dark:bg-gray-900">
-      <SectionCard
-        heading="Achievements & Certificates"
-        subtext="Click a certificate to view full screen."
-      />
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-16">
-        {achievements.map((achievement, idx) => (
-          <AchievementCard key={idx} {...achievement} />
-        ))}
+    <section className="section-padding section-alt">
+      <div className="section-container">
+        <SectionCard heading="Achievements" label="// certificates" subtext="Click a certificate to view full screen." />
+        <StaggerGrid className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {achievements.map((a, idx) => (
+            <AchievementCard key={a.id || idx} {...a} index={idx} stagger />
+          ))}
+        </StaggerGrid>
       </div>
     </section>
   );

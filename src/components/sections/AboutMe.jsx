@@ -2,40 +2,41 @@ import { motion } from "framer-motion";
 import Wahid from "../../assets/wahid.png";
 import { useSettings } from "../../context/SettingsContext";
 import { highlightText } from "../../utils/highlightText";
-
-
+import SectionCard from "../ui/SectionCard";
+import TerminalWindow from "../ui/TerminalWindow";
+import { slideInLeft, slideInRight, cardHoverLift } from "../../utils/motionVariants";
 
 export default function AboutMe() {
   const { settings } = useSettings();
 
   return (
-    <section className="bg-white py-24 px-6 md:px-20">
-      <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-12">
-        {/* Left: Image */}
-        <motion.div
-          className="flex-1 flex justify-center md:justify-start"
-          initial={{ opacity: 0, x: -50 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8 }}
-        >
-          <div className="w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-gray-200 shadow-lg">
-            <img src={Wahid} alt="Wahid" className="w-full h-full object-cover" />
-          </div>
-        </motion.div>
+    <section className="section-padding section-alt">
+      <div className="section-container">
+        <SectionCard heading="About Me" label="// about" subtext="Backend engineer focused on clean APIs and scalable systems." />
 
-        {/* Right: Text Content */}
-        <motion.div
-          className="flex-1 space-y-6 text-center md:text-left"
-          initial={{ opacity: 0, x: 50 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-        >
-          <h2 className="text-4xl font-bold text-black font-asimovian">About Me</h2>
-          <p className="text-gray-700 text-lg md:text-xl font-gowun leading-relaxed text-justify">
-            {highlightText(settings.about, settings.highlightText)}
-          </p>
+        <div className="flex flex-col md:flex-row items-center gap-12">
+          <motion.div {...slideInLeft} className="flex-shrink-0">
+            <motion.div className="broken-frame p-1 terminal-card-shimmer" {...cardHoverLift}>
+              <div className="w-56 h-56 md:w-64 md:h-64 overflow-hidden">
+                <img src={Wahid} alt="Wahidul Islam" className="w-full h-full object-cover" />
+              </div>
+            </motion.div>
+          </motion.div>
 
-        </motion.div>
+          <motion.div className="flex-1 w-full" {...slideInRight}>
+            <TerminalWindow title="~/about/README.md" tabLabel="md">
+              <motion.div
+                className="terminal-card-body leading-relaxed whitespace-pre-line"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+              >
+                {highlightText(settings.about, settings.highlightText)}
+              </motion.div>
+            </TerminalWindow>
+          </motion.div>
+        </div>
       </div>
     </section>
   );

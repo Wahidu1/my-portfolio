@@ -1,52 +1,77 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub, faLinkedinIn, faTwitter } from "@fortawesome/free-brands-svg-icons";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useSettings } from "../../context/SettingsContext";
 import { useSettingsFiles } from "../../context/settingsFilesContext";
+import { scrollToTop } from "../../utils/scrollToTop";
+
+const footerLinks = [
+  { id: "about", label: "~/about" },
+  { id: "skills", label: "~/skills" },
+  { id: "works", label: "~/works" },
+  { id: "contact", label: "~/contact" },
+];
 
 export default function Footer() {
   const { settings } = useSettings();
   const { settingsFiles } = useSettingsFiles();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const isHome = location.pathname === "/";
+  const getHref = (id) => (isHome ? `#${id}` : `/#${id}`);
+
+  const handleBrandClick = (e) => {
+    if (isHome) {
+      e.preventDefault();
+      window.history.replaceState(null, "", "/");
+      scrollToTop();
+    } else {
+      e.preventDefault();
+      navigate("/");
+    }
+  };
 
   return (
-    <footer className="bg-black text-gray-300 py-8 px-6 md:px-20">
-      <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+    <footer className="bg-white border-t border-[var(--color-border-strong)] py-10">
+      <div className="section-container">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+          <Link
+            to="/"
+            onClick={handleBrandClick}
+            className="flex items-center gap-3 group"
+            aria-label="Scroll to top"
+          >
+            <img src={settingsFiles.logo} alt="Logo" className="h-9 w-auto" />
+            <span className="font-mono text-xs text-gray-700 group-hover:text-[var(--color-accent)] transition-colors">
+              Wahidul Islam
+            </span>
+          </Link>
 
-        {/* Logo with white overlay */}
-        <div className="flex items-center space-x-2">
-          <img
-            src={settingsFiles.logo}
-            alt="Logo"
-            className="h-10 md:h-12 filter brightness-0 invert"
-          />
-          <span className="text-white font-asimovian text-2xl font-bold">Wahidul Islam</span>
+          <div className="flex flex-wrap justify-center gap-6 font-mono text-xs text-gray-500">
+            {footerLinks.map(({ id, label }) => (
+              <a key={id} href={getHref(id)} className="hover:text-[var(--color-accent)] transition-colors">
+                {label}
+              </a>
+            ))}
+          </div>
+
+          <div className="flex gap-5 text-lg text-gray-400">
+            <a href={settings.github || "#"} target="_blank" rel="noopener noreferrer" className="hover:text-[var(--color-accent)] transition-colors" aria-label="GitHub">
+              <FontAwesomeIcon icon={faGithub} />
+            </a>
+            <a href={settings.linkedin || "#"} target="_blank" rel="noopener noreferrer" className="hover:text-[var(--color-accent)] transition-colors" aria-label="LinkedIn">
+              <FontAwesomeIcon icon={faLinkedinIn} />
+            </a>
+            <a href={settings.twitter || "#"} target="_blank" rel="noopener noreferrer" className="hover:text-[var(--color-accent)] transition-colors" aria-label="Twitter">
+              <FontAwesomeIcon icon={faTwitter} />
+            </a>
+          </div>
         </div>
 
-        {/* Quick Links */}
-        <div className="flex flex-wrap justify-center gap-6 text-sm md:text-base">
-          <Link to="/" className="hover:text-white transition">Home</Link>
-          <Link to="/projects" className="hover:text-white transition">My Works</Link>
-          <Link to="/contact" className="hover:text-white transition">Contact</Link>
-          <Link to="/blog" className="hover:text-white transition">Blog</Link>
-        </div>
-
-        {/* Social Icons */}
-        <div className="flex gap-4 text-xl justify-center md:justify-end">
-          <a href={settings.github || "#"} className="hover:text-amber-500 transition">
-            <FontAwesomeIcon icon={faGithub} />
-          </a>
-          <a href={settings.linkedin || "#"} className="hover:text-amber-500 transition">
-            <FontAwesomeIcon icon={faLinkedinIn} />
-          </a>
-          <a href={settings.twitter || "#"} className="hover:text-amber-500 transition">
-            <FontAwesomeIcon icon={faTwitter} />
-          </a>
-        </div>
-      </div>
-
-      {/* Bottom Divider */}
-      <div className="border-t border-gray-800 mt-6 pt-4 text-center text-sm text-gray-500">
-        © {new Date().getFullYear()} Wahid75. All rights reserved.
+        <p className="text-center font-mono text-xs text-gray-400 mt-8">
+          <span className="text-[var(--color-accent)]">&gt; </span>
+          © {new Date().getFullYear()} Wahidul Islam. All rights reserved.
+        </p>
       </div>
     </footer>
   );

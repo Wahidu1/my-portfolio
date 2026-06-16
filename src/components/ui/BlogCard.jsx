@@ -1,40 +1,29 @@
-import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { ArrowUpRight } from "lucide-react";
+import TerminalCard from "./TerminalCard";
 
-export default function BlogCard({ blog, index }) {
+export default function BlogCard({ blog, index, stagger = false }) {
+  const { title, slug, content, image, published_at } = blog;
 
-  const {id, title, slug, excerpt, content, image, published_at} = blog;
   return (
-    <motion.div
-      className="bg-white rounded-2xl shadow-md overflow-hidden flex flex-col hover:shadow-xl hover:scale-[1.02] transition-transform"
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ delay: index * 0.2, duration: 0.6 }}
-    >
-      {/* Blog Image */}
-      <div className="w-full h-48 overflow-hidden">
-        <img
-          src={image}
-          alt={title}
-          className="w-full h-full object-cover hover:scale-105 transition-transform"
-        />
-      </div>
-
-      {/* Blog Content */}
-      <div className="p-6 flex flex-col justify-between flex-grow">
-        <div>
-          <p className="text-gray-500 text-sm mb-2">{published_at}</p>
-          <h3 className="text-xl font-bold mb-3">{title}</h3>
-          <p className="text-gray-700 text-sm line-clamp-3">{content}</p>
+    <TerminalCard index={index} stagger={stagger} filePath={`blog/${slug}.md`} className="h-full">
+      {image && (
+        <div className="terminal-card-image-wrap terminal-card-shimmer h-44">
+          <img src={image} alt={title} className="w-full h-full object-cover" />
         </div>
+      )}
+      <div className="p-5 flex flex-col flex-grow">
+        <p className="font-mono text-xs text-[var(--color-accent)] mb-2">{published_at}</p>
+        <h3 className="terminal-card-title mb-2">{title}</h3>
+        <p className="terminal-card-body line-clamp-3 flex-grow">{content}</p>
         <Link
           to={`/blog/${slug}`}
-          rel="noopener noreferrer"
-          className="mt-6 inline-block text-sm font-semibold text-black border border-black px-4 py-2 rounded-lg hover:bg-black hover:text-white transition"
+          className="mt-4 inline-flex items-center gap-1 font-mono text-xs text-[var(--color-accent)] group/link"
         >
-          Read More →
+          <span className="group-hover/link:underline">&gt; read_more</span>
+          <ArrowUpRight size={13} className="transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
         </Link>
       </div>
-    </motion.div>
+    </TerminalCard>
   );
 }

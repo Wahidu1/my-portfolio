@@ -1,49 +1,36 @@
 import { useEffect, useState } from "react";
 import BlogCard from "../ui/BlogCard";
 import SectionCard from "../ui/SectionCard";
+import StaggerGrid from "../ui/StaggerGrid";
 import { getBlogs } from "../../services/blogService";
 
 export default function Blog() {
-  const [blogs, setBlogs] = useState([])
+  const [blogs, setBlogs] = useState([]);
 
   useEffect(() => {
     async function fetchBlogs() {
       try {
-        const blogs = await getBlogs();
-        const data = blogs.results || [];
-        const formatted = data.map((item) => ({
-          id: item.id,
-          title: item.title,
-          slug: item.slug,
-          excerpt: item.excerpt,
-          content: item.content,
-          image: item.image,
-          published_at: item.published_at
-        }))
-
-        setBlogs(formatted);
+        const res = await getBlogs();
+        setBlogs((res.results || []).map((item) => ({
+          id: item.id, title: item.title, slug: item.slug,
+          content: item.content, image: item.image, published_at: item.published_at,
+        })));
       } catch (err) {
-        console.error("Error loading projects:", err);
+        console.error("Error loading blogs:", err);
       }
     }
     fetchBlogs();
   }, []);
 
   return (
-    <section className="bg-gray-50 text-black py-24 px-6 md:px-20 relative">
-      <div className="max-w-6xl mx-auto">
-        {/* Heading */}
-        <SectionCard
-        heading={"Blog"}
-        subtext={"Sharing insights, tutorials, and my thoughts on backend development, Django, and software engineering."}
-
-        />
-        {/* Blog Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <section className="section-padding section-alt">
+      <div className="section-container">
+        <SectionCard heading="Blog" label="// blog" subtext="Insights on backend development and software engineering." />
+        <StaggerGrid className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {blogs.map((blog, idx) => (
-            <BlogCard key={idx} blog={blog} index={idx} />
+            <BlogCard key={blog.id || idx} blog={blog} index={idx} stagger />
           ))}
-        </div>
+        </StaggerGrid>
       </div>
     </section>
   );

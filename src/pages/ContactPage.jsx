@@ -1,14 +1,13 @@
-import React from 'react';
-import Contact from '../components/sections/Contact';
-import AnimatedHero from '../components/common/SimpleHero';
+import Contact from "../components/sections/Contact";
+import AnimatedHero from "../components/common/SimpleHero";
 
 const ContactPage = () => {
-    return (
-        <>
-        <AnimatedHero />
-        <Contact />
-        </>
-    );
+  return (
+    <>
+      <AnimatedHero path="/contact" title="Contact" />
+      <Contact />
+    </>
+  );
 };
 
 export default ContactPage;

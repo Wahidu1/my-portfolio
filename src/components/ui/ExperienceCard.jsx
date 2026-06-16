@@ -1,21 +1,45 @@
 import { motion } from "framer-motion";
+import { springSmooth } from "../../utils/motionVariants";
 
 export default function ExperienceCard({ exp, index }) {
-  const {title, company, description, start_date, end_date} = exp;
+  const { title, company, description, start_date, end_date } = exp;
+
   return (
     <motion.div
-      className="relative pl-10 pb-12 border-l border-gray-300 last:pb-0"
-      initial={{ opacity: 0, x: -30 }}
+      className="relative pl-8 pb-10 border-l-2 border-gray-200 last:pb-0 group"
+      initial={{ opacity: 0, x: -24 }}
       whileInView={{ opacity: 1, x: 0 }}
-      transition={{ delay: index * 0.2, duration: 0.6 }}
+      viewport={{ once: true, margin: "-30px" }}
+      transition={{ ...springSmooth, delay: index * 0.1 }}
     >
-      {/* Timeline dot */}
-      <span className="absolute left-0 top-1 w-4 h-4 bg-black rounded-full border-2 border-white shadow-md"></span>
+      <motion.span
+        className="absolute left-0 top-1.5 -translate-x-1/2 w-3.5 h-3.5 bg-[var(--color-accent)] border-[3px] border-white shadow-sm"
+        initial={{ scale: 0 }}
+        whileInView={{ scale: 1 }}
+        viewport={{ once: true }}
+        transition={{ ...springSmooth, delay: index * 0.1 + 0.15 }}
+        whileHover={{ scale: 1.3 }}
+      />
 
-      {/* Content */}
-      <h3 className="text-xl font-bold text-black">{title}</h3>
-      <span className="text-sm text-gray-500">{company} • {start_date} - {end_date ? end_date : "Present"}</span>
-      <p className="text-gray-600 mt-2 text-sm leading-relaxed">{description}</p>
+      <motion.p
+        className="font-mono text-xs text-[var(--color-syntax)] mb-1.5"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ delay: index * 0.1 + 0.2 }}
+      >
+        commit {String(index + 1).padStart(4, "0")}
+      </motion.p>
+
+      <h3 className="terminal-card-title group-hover:text-[var(--color-accent)] transition-colors duration-300">
+        {title}
+      </h3>
+      <p className="terminal-meta mt-1">
+        @ {company} · {start_date} — {end_date || "present"}
+      </p>
+      <p className="terminal-card-body mt-3 border-l-2 border-gray-100 pl-4 group-hover:border-[var(--color-accent)]/30 transition-colors duration-300">
+        {description}
+      </p>
     </motion.div>
   );
 }

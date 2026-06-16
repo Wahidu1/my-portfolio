@@ -1,32 +1,47 @@
 import { motion } from "framer-motion";
+import { sectionHeaderLabel, sectionHeaderTitle } from "../../utils/motionVariants";
 
-export default function SectionCard({ heading, subtext }) {
+export default function SectionCard({ heading, subtext, label }) {
+  const sectionLabel = label || `// ${heading?.toLowerCase().replace(/\s+/g, "_")}`;
+
   return (
-    <motion.div
-      className="max-w-3xl mx-auto bg-transparent text-center backdrop-blur-md mb-12"
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8 }}
-    >
-      {/* Heading */}
-      <motion.h2
-        className="text-4xl md:text-5xl font-bold mb-4 font-asimovian text-black dark:text-white"
-        initial={{ opacity: 0, y: -20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-      >
+    <div className="text-center mb-12 md:mb-14 max-w-2xl mx-auto">
+      <motion.p className="terminal-section-label mb-3" {...sectionHeaderLabel}>
+        {sectionLabel}
+      </motion.p>
+
+      <motion.h2 className="terminal-section-heading" {...sectionHeaderTitle}>
+        <motion.span
+          className="terminal-section-prompt inline-block mr-1"
+          initial={{ opacity: 0, x: -8 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4, delay: 0.12 }}
+        >
+          &gt;
+        </motion.span>
         {heading}
       </motion.h2>
 
-      {/* Subtext */}
-      <motion.p
-        className="text-gray-500 dark:text-gray-400 text-lg md:text-xl font-dancing-script"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ delay: 0.3 }}
-      >
-        {subtext}
-      </motion.p>
-    </motion.div>
+      {subtext && (
+        <motion.p
+          className="terminal-section-sub mt-4"
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
+          {subtext}
+        </motion.p>
+      )}
+
+      <motion.div
+        className="mt-6 mx-auto h-px w-16 bg-gradient-to-r from-transparent via-[var(--color-accent)] to-transparent"
+        initial={{ scaleX: 0, opacity: 0 }}
+        whileInView={{ scaleX: 1, opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, delay: 0.25 }}
+      />
+    </div>
   );
 }

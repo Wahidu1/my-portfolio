@@ -1,68 +1,41 @@
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
 export default function MousePointer() {
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const [isHovering, setIsHovering] = useState(false);
+  const prefersReducedMotion = useReducedMotion();
+  const [pos, setPos] = useState({ x: 0, y: 0 });
+  const [hover, setHover] = useState(false);
 
   useEffect(() => {
-    const handleMouseMove = (e) => {
-      setMousePos({ x: e.clientX, y: e.clientY });
+    if (prefersReducedMotion) return;
+
+    const onMove = (e) => setPos({ x: e.clientX, y: e.clientY });
+    const onOver = (e) => {
+      setHover(!!e.target.closest("a, button, [data-hover], input, textarea"));
     };
-
-    const handleMouseOver = (e) => {
-      if (e.target.closest("a, button, [data-hover]")) {
-        setIsHovering(true);
-      } else {
-        setIsHovering(false);
-      }
-    };
-
-    window.addEventListener("mousemove", handleMouseMove);
-    window.addEventListener("mouseover", handleMouseOver);
-
+    window.addEventListener("mousemove", onMove);
+    window.addEventListener("mouseover", onOver);
     return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-      window.removeEventListener("mouseover", handleMouseOver);
+      window.removeEventListener("mousemove", onMove);
+      window.removeEventListener("mouseover", onOver);
     };
-  }, []);
+  }, [prefersReducedMotion]);
 
-  const cursorVariants = {
-    default: {
-      scale: 1,
-      opacity: 0.8,
-      // boxShadow: "0 0 8px rgba(0, 0, 0, 0.3)",
-    },
-    hover: {
-      scale: 1.5,
-      opacity: 1,
-      // boxShadow: "0 0 12px rgba(0, 0, 0, 0.5)",
-    },
-  };
+  if (prefersReducedMotion) return null;
 
   return (
     <motion.div
-      className="pointer-events-none fixed z-[9999]"
-      animate={{ x: mousePos.x - 16, y: mousePos.y - 16 }}
-      transition={{ type: "spring", stiffness: 600, damping: 25 }}
+      className="pointer-events-none fixed z-[9999] hidden md:block"
+      animate={{ x: pos.x - 8, y: pos.y - 8 }}
+      transition={{ type: "spring", stiffness: 800, damping: 30 }}
     >
-      <motion.div
-        className="w-8 h-8 rounded-full border-2 border-black/70 bg-transparent mix-blend-difference"
-        variants={cursorVariants}
-        animate={isHovering ? "hover" : "default"}
-        transition={{ duration: 0.2 }}
-      />
-      <motion.div
-        className="absolute top-0 left-0 w-8 h-8 rounded-full border border-black/30 mix-blend-difference"
-        animate={{
-          scale: [1, 1.2, 1],
-          opacity: [0.5, 0.3, 0.5],
-        }}
-        transition={{
-          duration: 1.5,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
+      <div
+        className={`w-4 h-4 border transition-all duration-150 ${
+          hover
+            ? "border-[var(--color-accent)] bg-[var(--color-accent)]/20 scale-150"
+            : "border-[var(--color-accent)]/70 bg-transparent"
+        }`}
+        style={{ borderRadius: 0 }}
       />
     </motion.div>
   );

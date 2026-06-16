@@ -1,47 +1,47 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import TerminalCard from "./TerminalCard";
+import { modalBackdrop, modalContent } from "../../utils/motionVariants";
 
-export default function AchievementCard({ title, organization, date, image }) {
+export default function AchievementCard({ title, organization, date, image, index = 0, stagger = false }) {
   const [isOpen, setIsOpen] = useState(false);
+  const fileName = title?.slice(0, 24).replace(/\s+/g, "_") || "certificate";
 
   return (
     <>
-      {/* Card */}
-      <motion.div
-        className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-2xl shadow-md p-4 cursor-pointer hover:shadow-xl transition-shadow"
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
+      <TerminalCard
+        index={index}
+        stagger={stagger}
+        filePath={`cert/${fileName}.jpg`}
         onClick={() => setIsOpen(true)}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => e.key === "Enter" && setIsOpen(true)}
+        aria-label={`View certificate: ${title}`}
       >
-        <img
-          src={image}
-          alt={title}
-          className="w-full h-32 object-cover rounded-lg mb-4"
-        />
-        <h3 className="text-lg font-semibold text-black dark:text-white">{title}</h3>
-        <p className="text-gray-500 dark:text-gray-400 text-sm">{organization}</p>
-        <p className="text-gray-400 dark:text-gray-500 text-xs mt-1">{date}</p>
-      </motion.div>
+        <div className="terminal-card-image-wrap h-40">
+          <img src={image} alt={title} className="w-full h-full object-cover" />
+        </div>
+        <div className="p-4">
+          <h3 className="terminal-card-title">{title}</h3>
+          <p className="terminal-meta mt-1">{organization}</p>
+          <p className="font-mono text-xs text-[var(--color-accent)] mt-1.5">{date}</p>
+        </div>
+      </TerminalCard>
 
-      {/* Lightbox Modal */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/55 backdrop-blur-sm flex items-center justify-center z-50 p-4"
+            {...modalBackdrop}
             onClick={() => setIsOpen(false)}
           >
             <motion.img
               src={image}
               alt={title}
-              className="max-w-full max-h-full rounded-lg shadow-lg"
-              initial={{ scale: 0.8 }}
-              animate={{ scale: 1 }}
-              exit={{ scale: 0.8 }}
-              onClick={(e) => e.stopPropagation()} // prevent closing when clicking image
+              className="max-w-full max-h-[90vh] border-2 border-white shadow-2xl"
+              {...modalContent}
+              onClick={(e) => e.stopPropagation()}
             />
           </motion.div>
         )}

@@ -1,13 +1,53 @@
 [
   {
-  "id": 1,
-  "title": "Machine Learning-Enhanced SPR-based Optical Biosensor for Cancer Cell Detection",
-  "subtext": "Research Project",
-  "description": "A research project focused on developing a Surface Plasmon Resonance (SPR)-based optical biosensor enhanced with machine learning techniques for the detection of cancer cells.",
-  "image": "/projects/project_11.jpg",
-  "technologies": ["Python", "Machine Learning"],
-  "live_link": "https://authors.elsevier.com/c/1liku6wNV0YPs",
-  "github_link": ""
+    "id": 1,
+    "title": "Machine Learning-Enhanced SPR-based Optical Biosensor for Cancer Cell Detection",
+    "subtext": "Research Project",
+    "description": "A research project focused on developing a Surface Plasmon Resonance (SPR)-based optical biosensor enhanced with machine learning techniques for the detection of cancer cells.",
+    "image": "/projects/project_11.jpg",
+    "technologies": ["Python", "Machine Learning"],
+    "live_link": "https://authors.elsevier.com/c/1liku6wNV0YPs",
+    "github_link": ""
+  },
+  {
+    "id": 5,
+    "title": "Employee Attendance System",
+    "subtext": "Enterprise Platform · Confidential",
+    "description": "Internal HR system for attendance tracking, leave management, and automated reporting. Designed REST APIs, role-based permissions, and admin dashboards for managers.",
+    "image": "/projects/attendance-system.jpg",
+    "technologies": ["Django", "DRF", "PostgreSQL", "JWT", "Redis"],
+    "live_link": "",
+    "github_link": ""
+  },
+  {
+    "id": 6,
+    "title": "Smart Parking Platform",
+    "subtext": "Enterprise Platform · AI-Integrated",
+    "description": "Parking operations platform with slot management, entry/exit logging, and backend services supporting AI-based vehicle detection and availability updates.",
+    "image": "/projects/parking.jpg",
+    "technologies": ["Django", "DRF", "PostgreSQL", "Python", "REST API"],
+    "live_link": "",
+    "github_link": ""
+  },
+  {
+    "id": 7,
+    "title": "Internal LLM Chat Assistant",
+    "subtext": "Enterprise Platform · Confidential",
+    "description": "Internal chat assistant for teams with conversation history, access control, and API integration with company workflows. Built secure backend orchestration and prompt/session handling.",
+    "image": "/projects/llm-chat.jpg",
+    "technologies": ["Django", "DRF", "PostgreSQL", "LLM API", "WebSockets"],
+    "live_link": "",
+    "github_link": ""
+  },
+  {
+    "id": 8,
+    "title": "AI Restaurant Operations Monitor",
+    "subtext": "Enterprise Platform · Computer Vision",
+    "description": "Monitoring backend for restaurant operations using AI-assisted video analysis, alert pipelines, and admin reporting dashboards.",
+    "image": "/projects/resturent.jpg",
+    "technologies": ["Django", "DRF", "PostgreSQL", "Python", "Computer Vision"],
+    "live_link": "",
+    "github_link": ""
   },
   {
     "id": 2,

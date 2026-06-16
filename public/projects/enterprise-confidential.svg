@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="480" viewBox="0 0 800 480" fill="none">
+  <rect width="800" height="480" fill="#F8F9FB"/>
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#D1D5DB" stroke-width="1" opacity="0.6"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="480" fill="url(#grid)"/>
+  <rect x="40" y="40" width="720" height="400" stroke="#2D323E" stroke-width="2" fill="#FFFFFF"/>
+  <rect x="40" y="40" width="720" height="36" fill="#EEF0F3" stroke="#2D323E" stroke-width="2"/>
+  <circle cx="64" cy="58" r="6" fill="#F87171"/>
+  <circle cx="84" cy="58" r="6" fill="#FBBF24"/>
+  <circle cx="104" cy="58" r="6" fill="#4ADE80"/>
+  <text x="130" y="63" font-family="monospace" font-size="13" fill="#6B7280">enterprise · confidential</text>
+  <text x="400" y="250" text-anchor="middle" font-family="monospace" font-size="28" fill="#2D323E" font-weight="600">NDA</text>
+  <text x="400" y="290" text-anchor="middle" font-family="monospace" font-size="14" fill="#0078D4">&gt; no public demo available</text>
+  <line x1="200" y1="320" x2="600" y2="320" stroke="#D1D5DB" stroke-width="1"/>
+  <text x="400" y="350" text-anchor="middle" font-family="monospace" font-size="12" fill="#9CA3AF">Internal enterprise platform</text>
+</svg>

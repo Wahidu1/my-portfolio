@@ -1,14 +1,13 @@
-import React from 'react';
-import Experience from '../components/sections/Experience';
-import AnimatedHero from '../components/common/SimpleHero';
+import Experience from "../components/sections/Experience";
+import AnimatedHero from "../components/common/SimpleHero";
 
 const ExperiencePage = () => {
-    return (
-        <>
-        <AnimatedHero />
-        <Experience />
-        </>
-    );
+  return (
+    <>
+      <AnimatedHero path="/experience" title="Experience" />
+      <Experience />
+    </>
+  );
 };
 
 export default ExperiencePage;
