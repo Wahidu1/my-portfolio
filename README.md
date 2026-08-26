@@ -127,6 +127,7 @@ Copy this template into `.env` and fill in your values. **Never commit `.env`** 
 ```env
 # App
 VITE_APP_NAME=Wahidul Islam | Backend Engineer
+VITE_SITE_URL=https://wahidulislam-site.web.app
 
 # Firebase (optional — analytics / future features)
 VITE_FIREBASE_API_KEY=
@@ -350,6 +351,16 @@ Open a pull request on GitHub before merging to `main` if you use branch protect
 
 - Run `npm run build` before `firebase deploy`
 - Hard-refresh browser (Ctrl+Shift+R) or clear cache
+
+### Social share preview wrong or missing image
+
+- OG tags require **absolute URLs** — set `VITE_SITE_URL` in `.env` before build
+- Image must be at `public/files/og-image.png` (recommended 1200×630 or larger)
+- After deploy, clear platform cache:
+  - [Facebook Sharing Debugger](https://developers.facebook.com/tools/debug/)
+  - [LinkedIn Post Inspector](https://www.linkedin.com/post-inspector/)
+  - [Twitter Card Validator](https://cards-dev.twitter.com/validator) (X)
+- LinkedIn/Facebook cache previews for ~24 hours — use debugger to force refresh
 
 ### `firebase: command not found`
 
